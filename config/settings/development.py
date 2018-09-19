@@ -44,7 +44,9 @@ THIRD_PARTY_APPS = [
 ]
 
 # Add your apps here
-LOCAL_APPS = []
+LOCAL_APPS = [
+    'ticket.apps.TicketConfig'
+]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
