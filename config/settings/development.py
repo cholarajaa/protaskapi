@@ -25,6 +25,7 @@ SECRET_KEY = 'g=onz708o$^xdf76m1j(k=%w))!)=(+38pkxxaw3m0-@)@dj-a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Add hosts to restrict api clients
 ALLOWED_HOSTS = []
 
 
@@ -39,11 +40,13 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# Add all third party apps here
 THIRD_PARTY_APPS = [
-    'rest_framework'
+    'rest_framework',
+    'corsheaders'
 ]
 
-# Add your apps here
+# Add your custom apps here
 LOCAL_APPS = [
     'ticket.apps.TicketConfig'
 ]
@@ -56,12 +59,17 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # allow CORS
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Allow all cors for development
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'config.urls'
 
