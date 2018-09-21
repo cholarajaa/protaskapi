@@ -3,6 +3,9 @@ from . import constants
 
 
 class AbstractModel(models.Model):
+    """
+        Abstract model to add common fields to all models.
+    """
     created = models.DateTimeField(auto_now=True)
     modified = models.DateTimeField(auto_now_add=True)
 
@@ -11,6 +14,7 @@ class AbstractModel(models.Model):
 
 
 class Tag(AbstractModel):
+
     name = models.CharField(max_length=200)
     slug = models.SlugField()
 
@@ -26,6 +30,15 @@ class User(AbstractModel):
 
 
 class Ticket(AbstractModel):
+    """
+        To allow a ticket to be entered as quickly as possible, only the
+        bare minimum fields are required. These basically allow us to
+        sort and manage the ticket. The user can always go back and
+        enter more information later.
+
+        Note that except summary all fields are optional
+        from dashboard we can prompt users to add extra details.
+    """
     summary = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     priority = models.CharField(max_length=2,
