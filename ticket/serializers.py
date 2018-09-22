@@ -1,6 +1,9 @@
 from rest_framework import serializers
 
 from . import models
+from . import constants
+
+priority_rev_dict = {v:k for k, v in constants.PRIORITY_CHOICES}
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -45,9 +48,10 @@ class TicketSerializer(serializers.ModelSerializer):
         if tag and data.get('tag'):
             data['tag'] = tag.name
         else:
-            data['tag'] = ''            
+            data['tag'] = ''
+        data['priority'] = priority_rev_dict.get(data.get('priority'), 'Normal')
         return data
 
     class Meta:
         model = models.Ticket
-        fields = '__all__'
+        exclude = ('created', 'modified', 'assignee')
